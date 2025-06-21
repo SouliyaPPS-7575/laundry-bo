@@ -1,0 +1,40 @@
+#root,
+.site-layout-height {
+  height: 'auto';
+  z-index: 10; 
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filter-button {
+  border-color: #d3d3d3;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  margin-right: 16px;
+  margin-top: -16px;
+  margin-bottom: 16px;
+}
+
+/* Styles for the FilterCollapse container to ensure it is above the table */
+.filter-collapse-wrapper {
+  position: relative;
+  z-index: 9; /* Ensure this value is greater than the table's z-index */
+}
+
+.table-wrapper {
+  position: relative;
+  z-index: 1;
+  margin-top: -30px;
+}
+
+.create-button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 16px; /* Adjust as needed */
+  margin-top: -5px;
+  margin-right: 16px;
+}

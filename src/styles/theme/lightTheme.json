@@ -1,0 +1,31 @@
+{
+  "token": {
+    "colorPrimary": "#0060B1",
+    "colorBgLayout": "#F5F5F5",
+    "colorLink": "#722ed1",
+    "colorSuccess": "#52c41a",
+    "colorWarning": "#faad14",
+    "colorError": "#f5222d",
+    "colorText": "#000000E0",
+    "colorBgContainer": "#FAFAFA",
+    "boxShadow": "0 0 10px 0 rgba(0, 0, 0, 0.1)",
+    "colorBorderSecondary": "#D9D9D9",
+    "borderRadius": 6,
+    "colorIcon": "#8C8C8C",
+    "colorBgBase": "#ffffff",
+    "colorBorder": "#cccccc"    
+  },
+  "components": {
+    "Layout": {
+      "headerBg": "#FAFAFA"
+    },
+    "Button": {
+      "colorPrimary": "#61B2DC",
+      "colorPrimaryActive": "#0060B1"
+    },
+    "Affix": {
+      "colorPrimary": "#FAFAFA",
+      "colorBgLayout": "#FAFAFA"
+    }
+  }
+}
