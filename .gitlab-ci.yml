@@ -16,7 +16,7 @@ image: node:20
 
 # Set environment variables during the build stage:
 variables:
-  VITE_BASE_URL: ''
+  VITE_BASE_URL: 'https://sensornode.shop'
 
 # Build stage to install dependencies and build the static site
 build:
@@ -29,13 +29,13 @@ build:
     - bun run build
   artifacts:
     paths:
-      - 'dist/'
+      - '/dist/'
 
 # Deploy to GitLab Pages in the /public directory
 pages:
   stage: deploy
   script:
-    - mv dist public/
+    - mv /dist public/
   artifacts:
     paths:
       - public/ # GitLab Pages will serve content from the 'public' directory
