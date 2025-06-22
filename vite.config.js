@@ -25,6 +25,8 @@ export default defineConfig(({ mode }) => {
     define: {
       // Use the environment variables loaded from the appropriate .env file
       'process.env': env,
+      'process.env.NODE_ENV': JSON.stringify(mode),
+      'process.env.VITE_BASE_URL': JSON.stringify(env.VITE_BASE_URL || '/'),
     },
     resolve: {
       alias: {
@@ -39,6 +41,18 @@ export default defineConfig(({ mode }) => {
         theme: path.resolve(__dirname, 'src/styles/theme'),
         services: path.resolve(__dirname, 'src/services'),
         utils: path.resolve(__dirname, 'src/utils'),
+      },
+    },
+    build: {
+      chunkSizeWarningLimit: 5000, // Increase the warning limit to 1000 kB
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes('node_modules')) {
+              return 'vendor';
+            }
+          },
+        },
       },
     },
   };
