@@ -9,7 +9,6 @@ stages:
 cache:
   paths:
     - node_modules/
-    - packages/**/node_modules/
 
 # Define the image to be used for CI
 image: node:20
@@ -22,8 +21,8 @@ variables:
 build:
   stage: build
   script:
-    - yarn -W --frozen-lockfile # Install dependencies
-    - yarn workspace react build # Ensure running the build script inside 'react' workspace
+    - bun install # Install dependencies
+    - bun run build # Ensure running the build script inside 'react' workspace
   artifacts:
     paths:
       - '/dist/' # Ensure this directory is where Vite outputs the build artifacts
@@ -32,7 +31,7 @@ build:
 pages:
   stage: deploy
   script:
-    - mv packages/**/dist public/
+    - mv dist public/
   artifacts:
     paths:
       - public/ # GitLab Pages will serve content from the 'public' directory
