@@ -1,4 +1,4 @@
-# .gitlab-ci.ym
+# .gitlab-ci.yml
 
 # Define the stages: build -> deploy
 stages:
@@ -12,7 +12,7 @@ cache:
     - 'bun.lockb'
 
 # Define the image to be used for CI
-image: oven/bun:1.1.10
+image: node:20
 
 # Set environment variables during the build stage:
 variables:
