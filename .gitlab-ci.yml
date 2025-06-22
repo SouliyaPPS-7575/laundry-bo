@@ -27,15 +27,20 @@ build:
     - export PATH="$BUN_INSTALL/bin:$PATH"
     - bun install
     - bun run build
+    - ls -l dist/
   artifacts:
     paths:
-      - '/dist/'
+      - 'dist/'
 
 # Deploy to GitLab Pages in the /public directory
 pages:
+  image: node:20
   stage: deploy
   script:
-    - mv /dist public/
+    - cp -r dist/* public/
+    - mv dist public/
   artifacts:
     paths:
-      - public/ # GitLab Pages will serve content from the 'public' directory
+      - public # GitLab Pages will serve content from the 'public' directory
+  only:
+    - master

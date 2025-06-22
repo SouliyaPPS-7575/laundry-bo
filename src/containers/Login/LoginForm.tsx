@@ -18,7 +18,7 @@ import {
 } from 'antd';
 
 import Logo from 'assets/LogoDark.png';
-import { emailRules, validatePassword } from 'hooks/Utils';
+import { emailRules, validatePassword } from '@/utils/Utils';
 import { useTranslation } from 'react-i18next';
 import { IAuth } from 'models/auth';
 import 'styles/css/Login.css';
