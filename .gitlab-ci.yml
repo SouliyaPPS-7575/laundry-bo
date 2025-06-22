@@ -1,4 +1,4 @@
-# .gitlab-ci.yml
+# .gitlab-ci.ym
 
 # Define the stages: build -> deploy
 stages:
@@ -8,10 +8,11 @@ stages:
 # Cache node_modules for faster builds
 cache:
   paths:
-    - node_modules/
+    - 'node_modules/'
+    - 'bun.lockb'
 
 # Define the image to be used for CI
-image: node:20
+image: oven/bun:1.1.10
 
 # Set environment variables during the build stage:
 variables:
@@ -21,11 +22,14 @@ variables:
 build:
   stage: build
   script:
-    - bun install # Install dependencies
-    - bun run build # Ensure running the build script inside 'react' workspace
+    - curl -fsSL https://bun.sh/install | bash
+    - export BUN_INSTALL="$HOME/.bun"
+    - export PATH="$BUN_INSTALL/bin:$PATH"
+    - bun install
+    - bun run build
   artifacts:
     paths:
-      - '/dist/' # Ensure this directory is where Vite outputs the build artifacts
+      - 'dist/'
 
 # Deploy to GitLab Pages in the /public directory
 pages:
