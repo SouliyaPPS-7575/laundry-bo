@@ -1,7 +1,16 @@
-import { localStorageToken } from "@/services/cache";
+import { useZitadelAuth } from '@/hooks/auth/useZitadelAuth';
+import { useQuery } from '@tanstack/react-query';
 
-// Mock function to check if a user is authenticated (real implementation should fetch token or auth state)
 export const useAuth = () => {
-  const token = !localStorageToken.getAccessToken(); // Example, replace with actual auth logic
-  return !!token; // Boolean indicating whether the user is authenticated
+  const { userManager } = useZitadelAuth();
+
+  const { data: user, isLoading } = useQuery({
+    queryKey: ['user'],
+    queryFn: async () => {
+      const user = await userManager.getUser();
+      return user;
+    },
+  });
+
+  return { isAuthenticated: !!user, isLoading };
 };

@@ -28,6 +28,7 @@
       "@/*": ["./src/*"],
       "/*": ["./public/*"],
       "routes/*": ["src/routes/*"],
+      "routes/auth/*": ["src/routes/auth/*"],
       "assets/*": ["src/assets/*"],
       "hooks/*": ["src/hooks/*"],
       "models/*": ["src/models/*"],

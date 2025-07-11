@@ -1,43 +1,26 @@
-import { IAuth, LoginData } from "@/models/auth";
-import { localStorageToken } from "@/services/cache";
-import { loginCallApi } from "@/services/https/auth";
-import { useMutation } from "@tanstack/react-query";
-import { useNavigate } from "@tanstack/react-router";
-import useNoti from "hooks/noti/useNoti";
-import { useTranslation } from "react-i18next";
+import { useNavigate } from '@tanstack/react-router';
+import useNoti from 'hooks/noti/useNoti';
+import { useTranslation } from 'react-i18next';
+import { useZitadelAuth } from '@/hooks/auth/useZitadelAuth';
 
 export const useLogin = () => {
-     const { t } = useTranslation();
-     const { addSuccessNoti } = useNoti();
-     const navigate = useNavigate();
+  const { t } = useTranslation();
+  const { addSuccessNoti } = useNoti();
+  const navigate = useNavigate();
+  const { authorize } = useZitadelAuth();
 
-     // Mutation for Login
-     const { mutate: actionLogin, status: statusLogin, isSuccess: isSuccessLogin } = useMutation<LoginData, Error, IAuth>({
-          mutationFn: loginCallApi,
-          onSuccess: async (token: LoginData) => {
-               localStorageToken.setToken({
-                    accessToken: token.accessToken,
-                    refreshToken: token.refreshToken,
-               });
+  const handleLogin = async () => {
+    try {
+      await authorize();
+      addSuccessNoti(t('login_successfully'), t('welcome'));
+      navigate({ to: '/' });
+    } catch (error) {
+      console.error('Zitadel login failed:', error);
+      // Handle login error, e.g., show an error notification
+    }
+  };
 
-               // Redirect upon successful login
-               navigate({ to: "/" });
-
-               // Trigger success notification
-               addSuccessNoti(t("login_successfully"), t("welcome"));
-          },
-     });
-
-
-     const handleLogin = (value: IAuth) => {
-          actionLogin(value);
-     };
-
-     return {
-          handleLogin,
-
-          // Mutation status
-          statusLogin,
-          isSuccessLogin,
-     };
+  return {
+    handleLogin,
+  };
 };

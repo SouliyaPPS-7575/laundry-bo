@@ -1,26 +1,21 @@
-import { handleTokenError } from "@/services/cache";
-import { logoutCallApi } from "@/services/https/auth";
-import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
+import { useZitadelAuth } from "./useZitadelAuth";
 
 export const useLogout = () => {
   const navigate = useNavigate();
+  const { signout } = useZitadelAuth();
 
-  const { mutate: actionLogout } = useMutation<void, Error>({
-    mutationFn: logoutCallApi,
-    onSuccess: async () => {
-      handleTokenError();
+  const handleLogout = async () => {
+    try {
+      await signout();
       navigate({ to: "/login" });
-    },
-  });
-
-  const handleLogout = () => {
-    handleTokenError();
-    navigate({ to: "/login" });
+    } catch (error) {
+      console.error("Zitadel logout failed:", error);
+      // Handle logout error
+    }
   };
 
   return {
-    actionLogout,
-    handleLogout
+    handleLogout,
   };
 };

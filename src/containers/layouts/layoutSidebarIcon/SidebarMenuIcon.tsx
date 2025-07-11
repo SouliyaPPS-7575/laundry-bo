@@ -1,5 +1,5 @@
 import { themeMode } from '@/styles/theme/themeConfig';
-import { Link, useLocation } from '@tanstack/react-router';
+import { useLocation } from '@tanstack/react-router';
 import { Affix, Col, Layout, Menu, Row } from 'antd';
 import React from 'react';
 import LogoLayoutSidebar from '../admin/LogoLayoutSidebar';
@@ -43,9 +43,7 @@ export const SidebarMenuIcon: React.FC<Props> = (prop) => {
       >
         <Row justify='center' style={{ margin: 1 }}>
           <Col>
-            <Link to='/'>
-              <LogoLayoutSidebar height={prop.collapsed ? '100%' : 100} />
-            </Link>
+            <LogoLayoutSidebar height={prop.collapsed ? '100%' : 100} />
           </Col>
         </Row>
       </Affix>

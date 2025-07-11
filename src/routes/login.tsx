@@ -1,9 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { Col, Image, Layout, Menu, Row } from 'antd';
+import { Button, Col, Image, Layout, Menu, Row } from 'antd';
 import LanguageIconLight from 'assets/LanguageIconLight.png';
 import LanguageIconDark from 'assets/LanguageIconDark.svg';
 import ChangeLanguage from 'containers/layouts/ChangeLanguage';
-import { LoginForm } from 'containers/Login/LoginForm';
 import { useLogin } from 'hooks/auth/useLogin';
 import 'styles/css/Login.css';
 import { useTheme } from '@/containers/layouts/admin/ThemeContext';
@@ -40,7 +39,7 @@ const Login: React.FC = () => {
         </Col>
       </Row>
 
-      <LoginForm handleLogin={handleLogin} />
+      <Button onClick={handleLogin}>Login with Zitadel</Button>
     </Layout>
   );
 };

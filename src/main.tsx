@@ -13,14 +13,23 @@ import { ThemeModeProvider } from './containers/layouts/admin/ThemeContext';
 import NotificationProvider from './hooks/noti/useNotificationProvider';
 import { routeTree } from './routeTree.gen';
 import { themes } from './styles/theme/themeConfig';
+import { createZitadelAuth } from './config/zitadel';
 
 const queryClient = new QueryClient();
+
+const zitadelAuth = createZitadelAuth({
+  authority: process.env.VITE_ZITADEL_AUTHORITY,
+  client_id: process.env.VITE_ZITADEL_CLIENT_ID,
+  redirect_uri: process.env.VITE_ZITADEL_REDIRECT_URI,
+  post_logout_redirect_uri: process.env.VITE_ZITADEL_POST_LOGOUT_REDIRECT_URI,
+});
 
 // Set up a Router instance
 const router = createRouter({
   routeTree,
   context: {
     queryClient,
+    zitadelAuth,
   },
   defaultPreload: 'intent',
   defaultPreloadStaleTime: 0,
@@ -47,7 +56,7 @@ if (!rootElement.innerHTML) {
         <ThemeModeProvider>
           <I18nextProvider i18n={i18n}>
             <NotificationProvider>
-              <RouterProvider router={router} />
+                <RouterProvider router={router} />
             </NotificationProvider>
           </I18nextProvider>
         </ThemeModeProvider>
