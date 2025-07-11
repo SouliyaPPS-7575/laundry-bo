@@ -20,12 +20,11 @@ export const Route = createRootRoute({
       if (
         !isLoading &&
         !isAuthenticated &&
-        pathname !== '/login' &&
         !pathname.startsWith('/callback')
       ) {
         navigate({ to: '/login' });
       }
-    }, [isAuthenticated, isLoading, navigate, pathname]);
+    }, [isAuthenticated, isLoading, pathname]);
 
     if (isLoading) {
       return <div>Loading...</div>; // Or a proper loading spinner

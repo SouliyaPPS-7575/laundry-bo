@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
 import { useZitadelAuth } from '@/hooks/auth/useZitadelAuth';
+import { useEffect, useState } from 'react';
 
 export const useAuth = () => {
   const { userManager, authorize, signout } = useZitadelAuth();

@@ -1,4 +1,4 @@
-import { useAuth } from '@/hooks/auth/useAuth';
+import { zitadelAuthInstance } from '@/hooks/auth/useZitadelAuth';
 import { Outlet, useLocation } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 import { Layout } from 'antd';
@@ -12,7 +12,7 @@ export const LayoutNavbar = () => {
   const { pathname } = location;
 
   // Check if the user is authenticated
-  const isAuthenticated = useAuth();
+  const isAuthenticated = zitadelAuthInstance.userManager.getUser() !== null;
 
   // Condition to determine if we should show the layout
   const shouldShowLayout = isAuthenticated && pathname !== '/login';

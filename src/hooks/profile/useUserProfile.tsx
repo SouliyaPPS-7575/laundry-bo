@@ -11,7 +11,6 @@ export const useUserProfile = () => {
     isSuccess,
   } = useQuery({
     queryKey: userProfileKey.lists(),
-    staleTime: Infinity,
     queryFn: getUserProfile,
   });
 
