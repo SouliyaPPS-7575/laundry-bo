@@ -1,16 +1,29 @@
+import { useEffect, useState } from 'react';
 import { useZitadelAuth } from '@/hooks/auth/useZitadelAuth';
-import { useQuery } from '@tanstack/react-query';
 
 export const useAuth = () => {
-  const { userManager } = useZitadelAuth();
+  const { userManager, authorize, signout } = useZitadelAuth();
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const { data: user, isLoading } = useQuery({
-    queryKey: ['user'],
-    queryFn: async () => {
-      const user = await userManager.getUser();
-      return user;
-    },
-  });
+  useEffect(() => {
+    userManager.getUser().then((user) => {
+      if (user) {
+        setIsAuthenticated(true);
+      } else {
+        setIsAuthenticated(false);
+      }
+      setIsLoading(false);
+    });
+  }, [userManager]);
 
-  return { isAuthenticated: !!user, isLoading };
+  const login = () => {
+    authorize();
+  };
+
+  const logout = () => {
+    signout();
+  };
+
+  return { isAuthenticated, isLoading, login, logout, userManager };
 };

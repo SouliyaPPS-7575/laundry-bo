@@ -17,19 +17,17 @@ import {
   Row,
 } from 'antd';
 
-import Logo from 'assets/LogoDark.png';
 import { emailRules, validatePassword } from '@/utils/Utils';
-import { useTranslation } from 'react-i18next';
-import { IAuth } from 'models/auth';
-import 'styles/css/Login.css';
-import { rememberMe } from 'services/cache';
+import Logo from 'assets/LogoDark.png';
 import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { rememberMe } from 'services/cache';
+import 'styles/css/Login.css';
 
-interface Props {
-  handleLogin: (value: IAuth) => void;
-}
+import { useLogin } from '@/hooks/auth/useLogin';
 
-export const LoginForm = ({ handleLogin }: Props) => {
+export const LoginForm = () => {
+  const { handleLogin } = useLogin();
   const { t } = useTranslation();
   const [form] = Form.useForm();
   const formRef = React.createRef<FormInstance>();
@@ -54,7 +52,7 @@ export const LoginForm = ({ handleLogin }: Props) => {
             name='normal_login'
             className='login-form'
             initialValues={{ remember: true }}
-            onFinish={handleLogin}
+            onFinish={() => handleLogin()}
           >
             <Form.Item name='email' rules={emailRules(t)}>
               <Input

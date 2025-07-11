@@ -1,17 +1,17 @@
 import { useNavigate } from '@tanstack/react-router';
 import useNoti from 'hooks/noti/useNoti';
 import { useTranslation } from 'react-i18next';
-import { useZitadelAuth } from '@/hooks/auth/useZitadelAuth';
+import { useAuth } from './useAuth';
 
 export const useLogin = () => {
   const { t } = useTranslation();
   const { addSuccessNoti } = useNoti();
   const navigate = useNavigate();
-  const { authorize } = useZitadelAuth();
+  const { login } = useAuth();
 
   const handleLogin = async () => {
     try {
-      await authorize();
+      await login();
       addSuccessNoti(t('login_successfully'), t('welcome'));
       navigate({ to: '/' });
     } catch (error) {

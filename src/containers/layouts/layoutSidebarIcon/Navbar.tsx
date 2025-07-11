@@ -79,7 +79,7 @@ export const Navbar: React.FC<Props> = (props) => {
                       shape='circle'
                       size='large'
                       icon={<UserOutlined />}
-                      src={userInfo?.avatar}
+                      src={userInfo?.profile?.picture}
                       style={{ marginInline: '10px' }}
                     />
                     <span
@@ -88,7 +88,7 @@ export const Navbar: React.FC<Props> = (props) => {
                         marginRight: '2px',
                       }}
                     >
-                      {userInfo?.firstname}
+                      {userInfo?.profile?.nickname}
                     </span>
                   </>
                 }

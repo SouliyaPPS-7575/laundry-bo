@@ -1,13 +1,13 @@
 import { useNavigate } from "@tanstack/react-router";
-import { useZitadelAuth } from "./useZitadelAuth";
+import { useAuth } from "./useAuth";
 
 export const useLogout = () => {
   const navigate = useNavigate();
-  const { signout } = useZitadelAuth();
+  const { logout } = useAuth();
 
   const handleLogout = async () => {
     try {
-      await signout();
+      await logout();
       navigate({ to: "/login" });
     } catch (error) {
       console.error("Zitadel logout failed:", error);

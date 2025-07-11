@@ -340,7 +340,14 @@ function LaundryDashboard() {
   };
 
   const MainContent = () => (
-    <div style={{ padding: 16, height: '100%', overflow: 'auto', marginTop: '-20px' }}>
+    <div
+      style={{
+        padding: 16,
+        height: '100%',
+        overflow: 'auto',
+        marginTop: '-20px',
+      }}
+    >
       <div style={{ marginBottom: 24 }}>
         <Space
           align='center'

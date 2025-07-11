@@ -112,11 +112,11 @@ export const Navbar: React.FC = () => {
                       shape='circle'
                       size='large'
                       icon={<UserOutlined />}
-                      src={userInfo?.avatar}
+                      src={userInfo?.profile?.picture}
                       style={{ marginInline: '10px' }}
                     />
                     <span style={{ fontSize: '15px', marginRight: '2px' }}>
-                      {userInfo?.firstname}
+                      {userInfo?.profile?.nickname}
                     </span>
                   </>
                 }
@@ -208,11 +208,11 @@ export const Navbar: React.FC = () => {
                   shape='circle'
                   size='large'
                   icon={<UserOutlined />}
-                  src={userInfo?.avatar}
+                  src={userInfo?.profile?.picture}
                   style={{ marginRight: '10px' }}
                 />
                 <span style={{ fontSize: '15px', textAlign: 'right' }}>
-                  {userInfo?.firstname}
+                  {userInfo?.profile?.nickname}
                 </span>
               </div>
             }

@@ -1,8 +1,7 @@
-import { baseInstance } from "./axios_client";
-import * as types from 'models/profile';
+import { zitadelAuthInstance } from '@/hooks/auth/useZitadelAuth';
 
 // User Profile request
 export const getUserProfile = async () => {
-  const response = await baseInstance.get<types.UserProfile>('/v1/users/profile');
-  return response.data;
+  const response = await zitadelAuthInstance.userManager.getUser();
+  return response;
 };
