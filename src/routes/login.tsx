@@ -1,18 +1,17 @@
+import { useTheme } from '@/containers/layouts/admin/ThemeContext';
+import { LoginForm } from '@/containers/Login/LoginForm';
 import { useAuth } from '@/hooks/auth/useAuth';
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
-import { Button, Col, Image, Layout, Menu, Row } from 'antd';
+import { Col, Image, Layout, Menu, Row } from 'antd';
 import SubMenu from 'antd/es/menu/SubMenu';
 import LanguageIconDark from 'assets/LanguageIconDark.svg';
 import LanguageIconLight from 'assets/LanguageIconLight.png';
 import ChangeLanguage from 'containers/layouts/ChangeLanguage';
-import { useLogin } from 'hooks/auth/useLogin';
 import { useEffect } from 'react';
 import 'styles/css/Login.css';
-import { useTheme } from '@/containers/layouts/admin/ThemeContext';
 
 export const Route = createFileRoute('/login')({
   component: () => {
-    const { handleLogin } = useLogin();
     const { isDark } = useTheme();
     const navigate = useNavigate();
     const { isAuthenticated } = useAuth();
@@ -45,7 +44,7 @@ export const Route = createFileRoute('/login')({
           </Col>
         </Row>
 
-        <Button onClick={handleLogin}>Login with Zitadel</Button>
+        <LoginForm />
       </Layout>
     );
   },
