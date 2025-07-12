@@ -22,10 +22,12 @@ export default defineConfig(({ mode }) => {
       }),
     ],
     define: {
-      // Use the environment variables loaded from the appropriate .env file
-      'process.env': env,
+      // Expose all environment variables loaded by loadEnv.ts
+      ...Object.entries(env).reduce((acc, [key, value]) => {
+        acc[`process.env.${key}`] = JSON.stringify(value);
+        return acc;
+      }, {}),
       'process.env.NODE_ENV': JSON.stringify(mode),
-      'process.env.VITE_BASE_URL': JSON.stringify(env.VITE_BASE_URL || '/'),
     },
     resolve: {
       alias: {
